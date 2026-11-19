@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+target/
+
+# Editors and OS
+.DS_Store
+*.local
+vite.config.ts.timestamp-*

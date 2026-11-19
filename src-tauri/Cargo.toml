@@ -1,0 +1,35 @@
+[package]
+name = "pirates-parrot"
+description = "A friendly desktop widget that transcribes your voice in real time, locally."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lib]
+# A distinct library name avoids a Windows name clash between the lib and bin
+# artifacts (https://github.com/rust-lang/cargo/issues/8519).
+name = "pirates_parrot_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[lints]
+workspace = true
+
+[build-dependencies]
+tauri-build = { version = "2.7", features = [] }
+
+[dependencies]
+enigo = "0.6"
+log = "0.4"
+parrot-core = { path = "../crates/parrot-core" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tauri = { version = "2.12", features = ["macos-private-api", "tray-icon"] }
+tauri-plugin-clipboard-manager = "2.5"
+tauri-plugin-global-shortcut = "2.4"
+tauri-plugin-log = "2.10"
+tauri-plugin-single-instance = "2.5"
+tempfile = "3"
+thiserror = "2"
+tokio = { version = "1", features = ["time"] }

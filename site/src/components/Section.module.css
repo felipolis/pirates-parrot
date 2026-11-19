@@ -1,0 +1,22 @@
+.section {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: clamp(72px, 10vw, 120px) var(--gutter) 0;
+  scroll-margin-top: 24px;
+}
+
+.header {
+  display: grid;
+  gap: 14px;
+  max-width: 620px;
+  margin-bottom: 48px;
+}
+
+.title {
+  font-size: clamp(32px, 4.4vw, 46px);
+}
+
+.intro {
+  color: var(--foam-soft);
+  font-size: 18px;
+}

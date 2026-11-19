@@ -1,0 +1,193 @@
+/* A terminal on the desktop, with the parrot widget in its corner. */
+.desktop {
+  position: relative;
+  margin: 0;
+  padding-bottom: 72px;
+}
+
+.terminal {
+  overflow: hidden;
+  border: 1px solid var(--terminal-line);
+  border-radius: 12px;
+  background: var(--terminal);
+  box-shadow: 0 30px 60px rgb(0 0 0 / 45%);
+}
+
+.titleBar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--terminal-line);
+}
+
+/* The three window buttons, drawn as one element. */
+.lights {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--terminal-button);
+  box-shadow:
+    16px 0 var(--terminal-button),
+    32px 0 var(--terminal-button);
+}
+
+.title {
+  margin-left: 32px;
+  color: var(--foam-faint);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.screen {
+  display: grid;
+  gap: 14px;
+  min-height: 210px;
+  padding: 20px 20px 96px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.dim {
+  color: var(--foam-faint);
+}
+
+/* Text flows inline so the cursor follows the last word when it wraps. */
+.prompt {
+  padding-left: 1.4em;
+  color: var(--foam);
+  text-indent: -1.4em;
+}
+
+.caret {
+  display: inline-block;
+  width: 1.4em;
+  color: var(--brass-light);
+  text-indent: 0;
+}
+
+.pasted {
+  animation: land 260ms ease-out;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: var(--foam-soft);
+  animation: blink 1.1s steps(1) infinite;
+}
+
+/* The widget sits over the terminal's bottom-right corner, as on a real desktop. */
+.widget {
+  position: absolute;
+  right: -12px;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.bubble {
+  position: relative;
+  width: min(300px, 62vw);
+  margin-bottom: 64px;
+  padding: 10px 14px 12px;
+  border: 1.5px solid var(--ink);
+  border-radius: 16px;
+  background: var(--parchment);
+  box-shadow: 0 10px 24px rgb(0 0 0 / 40%);
+  color: var(--ink);
+}
+
+/* Tail pointing at the parrot. */
+.bubble::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  bottom: 14px;
+  width: 14px;
+  height: 14px;
+  border-top: 1.5px solid var(--ink);
+  border-right: 1.5px solid var(--ink);
+  background: var(--parchment);
+  transform: rotate(45deg);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgb(51 36 26 / 25%);
+  color: var(--ink-soft);
+  font-family: var(--font-print-caps), Georgia, serif;
+  font-size: 15px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--scarlet);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.done {
+  color: var(--kelp);
+}
+
+.done .dot {
+  background: var(--kelp);
+  animation: none;
+}
+
+.words {
+  min-height: 3.2em;
+  padding-top: 6px;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.placeholder {
+  color: var(--ink-soft);
+  font-family: var(--font-print), Georgia, serif;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.parrot {
+  flex: none;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes land {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor,
+  .dot,
+  .pasted {
+    animation: none;
+  }
+}

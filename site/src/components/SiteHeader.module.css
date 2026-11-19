@@ -1,0 +1,41 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 22px var(--gutter);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-flag), Georgia, serif;
+  font-size: 26px;
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  gap: clamp(16px, 3vw, 32px);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.nav a {
+  color: var(--foam-soft);
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: var(--foam);
+}
+
+/* On narrow screens only the way to the code stays. */
+@media (max-width: 560px) {
+  .nav a:not(:last-child) {
+    display: none;
+  }
+}

@@ -1,0 +1,11 @@
+# The repository holds two JavaScript projects: the desktop app's interface at
+# the root and the presentation website in `site/`.
+packages:
+  - site
+
+# Dependencies allowed to run install scripts. Both come with Wrangler, the
+# Cloudflare tool that deploys the website, and only fetch and check the
+# native binary for the current platform.
+allowBuilds:
+  esbuild: true
+  workerd: true

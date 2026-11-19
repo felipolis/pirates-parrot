@@ -1,0 +1,36 @@
+.steps {
+  counter-reset: step;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--terminal-line);
+}
+
+/* Roman numerals: the typeface's old-style digits read poorly on their own. */
+.step::before {
+  content: counter(step, upper-roman) '.';
+  counter-increment: step;
+  color: var(--brass);
+  font-family: var(--font-print), Georgia, serif;
+  font-size: 22px;
+  font-style: italic;
+}
+
+.title {
+  font-size: 26px;
+}
+
+.body {
+  color: var(--foam-soft);
+  line-height: 1.9;
+}

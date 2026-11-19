@@ -1,0 +1,25 @@
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0 40px;
+  margin: 0;
+}
+
+.fact {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 18px 0;
+  border-top: 1px solid var(--terminal-line);
+}
+
+.term {
+  color: var(--brass-light);
+  font-family: var(--font-print-caps), Georgia, serif;
+  font-size: 18px;
+}
+
+.detail {
+  margin: 0;
+  color: var(--foam-soft);
+}

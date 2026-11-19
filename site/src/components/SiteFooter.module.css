@@ -1,0 +1,26 @@
+.footer {
+  display: grid;
+  gap: 14px;
+  /* The rule above spans the content, not the gutters. */
+  width: min(calc(var(--page-width) - 2 * var(--gutter)), calc(100% - 2 * var(--gutter)));
+  margin: clamp(96px, 12vw, 144px) auto 0;
+  padding: 32px 0 48px;
+  border-top: 1px solid var(--terminal-line);
+  color: var(--foam-faint);
+  font-size: 14px;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.links a {
+  color: var(--foam-soft);
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: var(--foam);
+}

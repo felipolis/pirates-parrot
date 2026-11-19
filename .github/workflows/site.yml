@@ -1,0 +1,59 @@
+name: Site
+
+# Checks the website on every change to it, and deploys it to Cloudflare when
+# `main` changes or a new release of the app is published, so the download
+# buttons always point at the latest version.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      # The parrots are exported from the app's own component.
+      - 'src/lib/parrot/**'
+      - 'scripts/export-parrots.ts'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/site.yml'
+  pull_request:
+    paths:
+      - 'site/**'
+      - 'src/lib/parrot/**'
+      - 'scripts/export-parrots.ts'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/site.yml'
+  release:
+    types: [published]
+  workflow_dispatch:
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  site:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    env:
+      # Raises GitHub's API rate limit when the build reads the latest release.
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm build
+      - name: Deploy to Cloudflare
+        if: github.event_name != 'pull_request'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: site
+          command: deploy

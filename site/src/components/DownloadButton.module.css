@@ -1,0 +1,42 @@
+.download {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: var(--brass-light);
+  box-shadow: 0 3px 0 var(--brass);
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 var(--brass);
+}
+
+.button:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--brass);
+}
+
+.meta {
+  color: var(--foam-soft);
+  font-size: 14px;
+}
+
+.meta a {
+  color: var(--foam);
+  text-underline-offset: 3px;
+}

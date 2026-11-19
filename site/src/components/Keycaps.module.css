@@ -1,0 +1,20 @@
+.keys {
+  display: inline-flex;
+  gap: 5px;
+  vertical-align: middle;
+}
+
+.key {
+  display: inline-grid;
+  place-items: center;
+  min-width: 30px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 6px;
+  background: linear-gradient(var(--brass-light), var(--brass));
+  box-shadow: 0 2px 0 var(--brass-dark);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+}

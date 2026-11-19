@@ -1,0 +1,41 @@
+<!--
+  Source of the app icon: Captain Scarlet from src/lib/parrot. Regenerate the
+  platform icons after editing with `pnpm tauri icon src-tauri/icons/icon.svg`,
+  then delete the mobile and Windows Store outputs (android/, ios/, Square*,
+  StoreLogo, 64x64.png, icon.png): the app ships for desktop only.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <rect x="64" y="64" width="896" height="896" rx="200" fill="#0e7c86" />
+  <circle cx="512" cy="560" r="330" fill="#13909b" />
+  <g transform="translate(92 70) scale(8.4)">
+    <path d="M46 78C42 88 40 94 41 99C45 96 48 90 50 80Z" fill="#d93a2b" />
+    <path d="M54 78C58 88 60 94 59 99C55 96 52 90 50 80Z" fill="#d93a2b" />
+    <path d="M47.5 78C47.5 88 48.5 94 50 100C51.5 94 52.5 88 52.5 78Z" fill="#2f7fd6" />
+    <ellipse cx="29" cy="68" rx="8" ry="17" transform="rotate(14 29 68)" fill="#2f7fd6" />
+    <ellipse cx="26.5" cy="79" rx="5.5" ry="7" transform="rotate(14 26.5 79)" fill="#f5c431" />
+    <ellipse cx="71" cy="68" rx="8" ry="17" transform="rotate(-14 71 68)" fill="#2f7fd6" />
+    <ellipse cx="73.5" cy="79" rx="5.5" ry="7" transform="rotate(-14 73.5 79)" fill="#f5c431" />
+    <ellipse cx="50" cy="67" rx="21" ry="23" fill="#e0412f" />
+    <ellipse cx="50" cy="72" rx="13.5" ry="15" fill="#f2683a" />
+    <circle cx="50" cy="40" r="22" fill="#e0412f" />
+    <ellipse cx="40.5" cy="40" rx="8.5" ry="9.5" fill="#fff4ea" />
+    <ellipse cx="59.5" cy="40" rx="8.5" ry="9.5" fill="#fff4ea" />
+    <ellipse cx="35" cy="49" rx="3.6" ry="2.4" fill="#f7a6a0" opacity="0.8" />
+    <ellipse cx="65" cy="49" rx="3.6" ry="2.4" fill="#f7a6a0" opacity="0.8" />
+    <circle cx="41" cy="39" r="4.4" fill="#231c1a" />
+    <circle cx="42.6" cy="37.4" r="1.5" fill="#fff" />
+    <path d="M45.5 50C47 53 53 53 54.5 50C54.5 54.5 52.5 57.5 50 58.5C47.5 57.5 45.5 54.5 45.5 50Z" fill="#3b3633" />
+    <path d="M43.5 44C44 40.5 56 40.5 56.5 44C57 50 53.5 55 50 57C46.5 55 43 50 43.5 44Z" fill="#f1e9df" />
+    <path d="M13 30C22 20 33 22 37 24C39 11 61 11 63 24C67 22 78 20 87 30C75 27.5 63 33 50 33C37 33 25 27.5 13 30Z" fill="#3b2a22" />
+    <path d="M13 30C25 27.5 37 33 50 33C63 33 75 27.5 87 30" fill="none" stroke="#e2b13c" stroke-width="2" stroke-linecap="round" />
+    <circle cx="50" cy="22.5" r="3.3" fill="#f6f1e7" />
+    <rect x="48.6" y="24.6" width="2.8" height="1.8" rx="0.6" fill="#f6f1e7" />
+    <circle cx="48.8" cy="22.2" r="0.75" fill="#3b2a22" />
+    <circle cx="51.2" cy="22.2" r="0.75" fill="#3b2a22" />
+    <g fill="none" stroke="#1f1b1a" stroke-width="1.6" stroke-linecap="round">
+      <path d="M29 31C40 27 50 30 57 35" />
+      <path d="M64.5 41C68 43 70 45 71.5 47" />
+    </g>
+    <ellipse cx="59.5" cy="39.5" rx="6.2" ry="5.6" fill="#1f1b1a" />
+  </g>
+</svg>

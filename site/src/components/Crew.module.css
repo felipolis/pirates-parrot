@@ -1,0 +1,44 @@
+.crew {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 40px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.member {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.portrait {
+  margin-bottom: 10px;
+  transition: transform 200ms ease;
+}
+
+.member:hover .portrait {
+  transform: translateY(-4px) rotate(-3deg);
+}
+
+.name {
+  font-family: var(--font-print-caps), Georgia, serif;
+  font-size: 21px;
+}
+
+.tagline {
+  max-width: 200px;
+  color: var(--foam-soft);
+  font-family: var(--font-print), Georgia, serif;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait {
+    transition: none;
+  }
+}

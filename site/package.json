@@ -1,0 +1,33 @@
+{
+  "name": "pirates-parrot-site",
+  "version": "0.1.0",
+  "description": "The presentation website of Pirate's Parrot.",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "parrots": "pnpm --workspace-root run export-parrots site/public/parrots",
+    "predev": "pnpm run parrots",
+    "dev": "next dev",
+    "prebuild": "pnpm run parrots",
+    "build": "next build",
+    "lint": "eslint .",
+    "typecheck": "next typegen && tsc --noEmit",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^10.15.0",
+    "eslint-config-next": "16.4.6",
+    "eslint-config-prettier": "^10.1.8",
+    "typescript": "~6.0.3",
+    "wrangler": "^4.165.0"
+  }
+}

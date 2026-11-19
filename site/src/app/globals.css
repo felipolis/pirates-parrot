@@ -1,0 +1,88 @@
+/*
+  The desktop app's night-at-sea theme (src/styles/base.css at the repository
+  root): ink-dark water, parchment, brass and scarlet wax.
+*/
+
+:root {
+  --sea-deep: #07121c;
+  --sea: #0e2333;
+  --sea-glow: #24546a;
+  --foam: #f1e6cc;
+  --foam-soft: #a9bcc2;
+  --foam-faint: #6f8790;
+
+  --parchment: #e7d6b0;
+  --ink: #33241a;
+  --ink-soft: #66513b;
+
+  --brass: #c4912f;
+  --brass-light: #f0cf78;
+  --brass-dark: #85601b;
+  --scarlet: #b5352a;
+  --kelp: #3f7a3b;
+
+  --terminal: #0b1820;
+  --terminal-line: #1d3442;
+  --terminal-button: #4a5d66;
+
+  --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
+
+  --page-width: 1180px;
+  --gutter: clamp(20px, 5vw, 48px);
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--sea-deep);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse 90% 640px at 70% -120px, var(--sea-glow), transparent),
+    linear-gradient(var(--sea) 0, var(--sea-deep) 900px);
+  color: var(--foam);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-print), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brass-light);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

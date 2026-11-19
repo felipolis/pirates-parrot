@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // The built site (`out/`) is served as static assets by Cloudflare Workers.
+  "name": "pirates-parrot",
+  "compatibility_date": "2026-11-19",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page",
+  },
+}

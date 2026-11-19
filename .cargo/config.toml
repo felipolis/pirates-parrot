@@ -1,0 +1,5 @@
+# sherpa-onnx ships its Windows static libraries built against the static
+# MSVC runtime (/MT). Linking the Rust side the same way avoids runtime
+# mismatches and removes the need for the VC++ redistributable.
+[target.'cfg(all(windows, target_env = "msvc"))']
+rustflags = ["-C", "target-feature=+crt-static"]

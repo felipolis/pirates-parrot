@@ -1,0 +1,109 @@
+/*
+  Theme: charts and logbooks on a captain's table. Windows sit on the sea
+  (night in dark mode, day in light mode); content lives on parchment drawn
+  in ink, with brass details and scarlet wax seals.
+*/
+
+:root {
+  --font-body: 'Nunito Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-print: 'IM Fell English', Georgia, serif;
+  --font-print-caps: 'IM Fell English SC', Georgia, serif;
+  --font-flag: 'Pirata One', 'IM Fell English', Georgia, serif;
+
+  /* The sea behind everything. */
+  --sea-deep: #1b5763;
+  --sea: #2a7683;
+  --sea-glow: #63b2b4;
+  --foam: #fbf3df;
+  --foam-soft: #d6ebe6;
+  --sky-light: #f7e3a8;
+
+  /* Parchment and ink. */
+  --parchment: #f2e4c3;
+  --parchment-light: #f8eed6;
+  --ink: #33241a;
+  --ink-soft: #66513b;
+  --ink-faint: #9a8364;
+
+  /* Details. */
+  --brass: #c4912f;
+  --brass-light: #f0cf78;
+  --brass-dark: #85601b;
+  --scarlet: #b5352a;
+  --scarlet-light: #d9584a;
+  --scarlet-dark: #82221a;
+  /* Background of error banners. */
+  --scarlet-wash: #f6dcd3;
+  /* Text stamped on scarlet wax. */
+  --wax-text: #fbe9dc;
+  --teal-ink: #1d6a70;
+  --teal-ink-dark: #17585d;
+  --kelp: #3f7a3b;
+  --wood-light: #7a4f2c;
+  --wood: #6b4527;
+  --wood-dark: #5c3a20;
+
+  --radius: 14px;
+  --shadow-lift: 0 2px 0 rgb(51 36 26 / 25%), 0 10px 24px rgb(4 18 28 / 35%);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sea-deep: #07121c;
+    --sea: #0e2333;
+    --sea-glow: #24546a;
+    --foam: #f1e6cc;
+    --foam-soft: #a9bcc2;
+    --sky-light: #f4ecd4;
+
+    --parchment: #e7d6b0;
+    --parchment-light: #efe2c3;
+    --shadow-lift: 0 2px 0 rgb(0 0 0 / 35%), 0 12px 28px rgb(0 0 0 / 50%);
+
+    color-scheme: dark;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+/* Paper grain, shared by every parchment surface. */
+.parchment {
+  background-color: var(--parchment);
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgb(255 255 255 / 35%), transparent 55%),
+    radial-gradient(ellipse at 100% 100%, rgb(150 110 50 / 22%), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.25 0 0 0 0 0.1 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color: var(--ink);
+}

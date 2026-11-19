@@ -1,0 +1,42 @@
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 56px;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: clamp(40px, 8vw, 96px) var(--gutter) 0;
+}
+
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  }
+}
+
+.copy {
+  display: grid;
+  gap: 28px;
+}
+
+.title {
+  font-size: clamp(40px, 4.4vw, 52px);
+  letter-spacing: -0.01em;
+}
+
+.second {
+  display: block;
+  color: var(--brass-light);
+  font-style: italic;
+}
+
+.lead {
+  max-width: 470px;
+  color: var(--foam-soft);
+  font-size: 19px;
+}
+
+.demo {
+  /* Room for the parrot that leans out past the terminal's edge. */
+  padding-right: 12px;
+}

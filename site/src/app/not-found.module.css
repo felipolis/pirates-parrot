@@ -1,0 +1,31 @@
+.lost {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  min-height: 100vh;
+  padding: var(--gutter);
+  text-align: center;
+}
+
+.code {
+  color: var(--brass);
+  font-family: var(--font-print), Georgia, serif;
+  font-size: 22px;
+  font-style: italic;
+}
+
+.title {
+  font-size: clamp(40px, 7vw, 64px);
+}
+
+.text {
+  color: var(--foam-soft);
+}
+
+.home {
+  margin-top: 12px;
+  color: var(--brass-light);
+  font-weight: 700;
+  text-underline-offset: 4px;
+}

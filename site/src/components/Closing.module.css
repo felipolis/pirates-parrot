@@ -1,0 +1,23 @@
+.closing {
+  display: grid;
+  justify-items: start;
+  gap: 24px;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: clamp(96px, 12vw, 144px) var(--gutter) 0;
+}
+
+.title {
+  font-size: clamp(36px, 5vw, 54px);
+}
+
+.note {
+  max-width: 520px;
+  color: var(--foam-faint);
+  font-size: 14px;
+}
+
+.note a {
+  color: var(--foam-soft);
+  text-underline-offset: 3px;
+}

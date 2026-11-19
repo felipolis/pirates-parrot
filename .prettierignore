@@ -1,0 +1,9 @@
+dist
+target
+src-tauri
+crates
+pnpm-lock.yaml
+site/.next
+site/out
+site/public/parrots
+site/next-env.d.ts
