@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Pirate's Parrot",
+  "productName": "Pirate’s Parrot",
   "mainBinaryName": "pirates-parrot",
   "identifier": "io.github.piratesparrot",
   "build": {

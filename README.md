@@ -36,7 +36,7 @@ Pirate's Parrot is not code-signed yet, so your system will warn you the first t
 - **Windows:** on "Windows protected your PC", click **More info**, then **Run anyway**.
 - **macOS:** after the first attempt to open it, go to System Settings → Privacy & Security and
   click **Open Anyway**. If macOS says the app is damaged, run
-  `xattr -dr com.apple.quarantine "/Applications/Pirate's Parrot.app"` in the Terminal.
+  `xattr -dr com.apple.quarantine "/Applications/Pirate’s Parrot.app"` in the Terminal.
 - **Linux:** make the AppImage executable with `chmod +x`, or install the package with your
   package manager (for example `sudo apt install ./<downloaded-file>.deb`).
 

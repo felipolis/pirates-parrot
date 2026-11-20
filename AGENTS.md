@@ -85,6 +85,8 @@ guessing.
 - Prefer official Tauri plugins over hand-written platform code.
 - The app icon comes from `src-tauri/icons/icon.svg`; regenerate the platform icons as its
   header comment describes instead of editing them by hand.
+- `productName` is written with the typographic apostrophe (`Pirate’s Parrot`). The ASCII `'`
+  breaks the script Tauri generates for the Windows (NSIS) installer.
 
 ### Svelte 5 and TypeScript
 
