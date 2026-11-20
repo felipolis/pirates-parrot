@@ -178,6 +178,9 @@ importers:
       '@fontsource/pirata-one':
         specifier: ^5.3.0
         version: 5.3.0
+      '@fortawesome/free-solid-svg-icons':
+        specifier: ^7.3.1
+        version: 7.3.1
       '@tauri-apps/api':
         specifier: ^2
         version: 2.12.5

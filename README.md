@@ -75,16 +75,17 @@ accuracy:
 
 ## Using it
 
-1. Launch Pirate's Parrot. On first run the settings window opens: click **Download model**.
+1. Launch Pirate's Parrot. On first run a short guide downloads the speech model with you and
+   has you try a first dictation.
 2. Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Space</kbd> (<kbd>⌘</kbd>+<kbd>⇧</kbd>+<kbd>Space</kbd>
    on macOS) or click the parrot, and start talking.
 3. Press the shortcut again or click the parrot to finish. The text is pasted where your cursor
    is and also copied to the clipboard.
 
 Drag the parrot anywhere; it remembers the spot. Right-click it, or use the tray icon, to hide it
-or open the settings, where you can change the shortcut (toggle or hold-to-talk), language,
-microphone, model and parrot. A hidden parrot still pops up while it listens to you, then goes
-away again.
+or open the settings, where tabs let you change the model, language, microphone, shortcut
+(toggle or hold-to-talk), what happens to the text and your parrot. A hidden parrot still pops
+up while it listens to you, then goes away again.
 
 > **Tip:** automatic language detection produces the best punctuation. Pick a fixed language only
 > if detection guesses wrong for you.

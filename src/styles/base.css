@@ -98,6 +98,50 @@ button {
   outline-offset: 2px;
 }
 
+/*
+  Brass scrollbars over the sea, as on the website. Chromium (WebView2) and
+  WebKit draw them from the ::-webkit-scrollbar parts. Firefox's engine has no
+  such parts and gets the standard properties instead, which Chromium would
+  otherwise prefer over the parts.
+*/
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: var(--sea-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid var(--sea-deep);
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brass-light), var(--brass) 55%, var(--brass-dark));
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--brass-light);
+  background-image: none;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-color: var(--brass) var(--sea-deep);
+  }
+}
+
+/* Text for screen readers only, such as a label the layout already implies. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* Paper grain, shared by every parchment surface. */
 .parchment {
   background-color: var(--parchment);

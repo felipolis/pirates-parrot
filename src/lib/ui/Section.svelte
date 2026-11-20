@@ -1,82 +1,46 @@
-<!-- A chapter of the captain's log: a parchment panel with an ornate heading. -->
+<!--
+  One part of a settings sheet: a small-caps heading, a line of explanation
+  and its controls. Consecutive sections are divided by a hand-ruled line.
+-->
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import Icon, { type IconName } from './Icon.svelte';
 
   interface Props {
     title: string;
-    icon: IconName;
     description?: string;
     children: Snippet;
   }
 
-  let { title, icon, description, children }: Props = $props();
+  let { title, description, children }: Props = $props();
 </script>
 
-<section class="section parchment">
+<section class="section">
   <header>
-    <span class="medallion"><Icon name={icon} size={22} /></span>
-    <div>
-      <h2>{title}</h2>
-      {#if description}
-        <p>{description}</p>
-      {/if}
-    </div>
+    <h2>{title}</h2>
+    {#if description}
+      <p>{description}</p>
+    {/if}
   </header>
-  <div class="flourish" aria-hidden="true"><span></span></div>
   <div class="body">
     {@render children()}
   </div>
 </section>
 
 <style>
-  .section {
-    position: relative;
-    padding: 20px 22px 22px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-lift);
-  }
-
-  /* Double ink rule, like the frame of an old chart. */
-  .section::before {
-    content: '';
-    position: absolute;
-    inset: 6px;
-    border: 1px solid rgb(51 36 26 / 30%);
-    border-radius: calc(var(--radius) - 5px);
-    box-shadow: inset 0 0 0 3px rgb(51 36 26 / 6%);
-    pointer-events: none;
+  .section:not(:first-child) {
+    margin-top: 24px;
+    padding-top: 22px;
+    border-top: 1px solid rgb(51 36 26 / 22%);
   }
 
   header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .medallion {
-    display: grid;
-    place-items: center;
-    flex: none;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle at 35% 30%,
-      var(--brass-light),
-      var(--brass) 55%,
-      var(--brass-dark)
-    );
-    box-shadow:
-      inset 0 0 0 2px rgb(255 240 200 / 35%),
-      0 1px 2px rgb(51 36 26 / 40%);
-    color: var(--ink);
+    margin-bottom: 14px;
   }
 
   h2 {
     margin: 0;
     font-family: var(--font-print-caps);
-    font-size: 21px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 1.1;
     letter-spacing: 0.01em;
@@ -90,37 +54,10 @@
     font-style: italic;
   }
 
-  /* Hand-ruled divider with a diamond in the middle. */
-  .flourish {
-    position: relative;
-    height: 12px;
-    margin: 12px 0 16px;
-  }
-
-  .flourish::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 0;
-    left: 0;
-    border-top: 1px solid rgb(51 36 26 / 35%);
-  }
-
-  .flourish span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 8px;
-    height: 8px;
-    border: 1px solid rgb(51 36 26 / 55%);
-    background: var(--parchment);
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-
   .body {
     display: grid;
-    /* Let content shrink to the panel instead of widening it. */
+    /* Let content shrink to the sheet instead of widening it. */
     grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
+    gap: 14px;
   }
 </style>

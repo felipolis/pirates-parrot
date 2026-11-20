@@ -37,13 +37,21 @@
   <circle class="port" cx="16" cy="46" r="4" />
   <path class="treasure" d="M294 26l12 12M306 26l-12 12" />
 
-  <g class="ship" style:transform="translate({ship.x}px, {ship.y - 4}px)">
+  <!-- A small ship heading for the X; its waterline sits on the route. -->
+  <g class="ship" style:transform="translate({ship.x}px, {ship.y}px) scale(0.8)">
     <g class="hull-motion">
-      <path class="mast" d="M0 3V-15" />
-      <path class="sail" d="M0.5-14Q11-8 0.5-1Z" />
-      <path class="sail" d="M-0.5-12Q-8-7-0.5-2Z" />
-      <path class="flag" d="M0-15l6 2-6 2Z" />
-      <path class="hull" d="M-12 2h24l-4.5 6.5h-15Z" />
+      <!-- Bowsprit and the jib, from the masthead to the bowsprit's tip. -->
+      <path class="spar" d="M12 -5L20 -9" />
+      <path class="sail" d="M1.5 -25.5L19.5 -8.5Q13 -9 9.5 -6.5Q8 -16 1.5 -25.5Z" />
+      <!-- Mast, yards and the square sail bellied by the wind. -->
+      <path class="spar" d="M0 -4V-28M-8 -24H8M-7 -11H7" />
+      <path class="sail" d="M-8 -23.5H8Q11 -17 7 -11.5H-7Q-4 -17 -8 -23.5Z" />
+      <path class="seam" d="M-2.6 -23.5Q0 -17 -2.2 -11.5M2.8 -23.5Q5.6 -17 2.4 -11.5" />
+      <!-- Pennant streaming ahead with the wind. -->
+      <path class="flag" d="M0 -28L8 -26.4L0 -24.8Z" />
+      <!-- Hull with a raised stern castle and a rising bow. -->
+      <path class="castle" d="M-15 -4V-8H-9V-4Z" />
+      <path class="hull" d="M-16 -4H12Q15 -4.5 17 -7Q16 -1 12 2Q9 4 3 4H-11Q-15 4 -16 0Z" />
     </g>
   </g>
 </svg>
@@ -59,7 +67,8 @@
   .route,
   .sailed,
   .treasure,
-  .mast {
+  .spar,
+  .seam {
     fill: none;
     stroke-linecap: round;
   }
@@ -89,22 +98,37 @@
     transition: transform 150ms linear;
   }
 
-  .hull {
-    fill: var(--wood);
+  .hull,
+  .castle {
     stroke: var(--ink);
     stroke-width: 1;
     stroke-linejoin: round;
   }
 
-  .mast {
+  .hull {
+    fill: var(--wood);
+  }
+
+  .castle {
+    fill: var(--wood-light);
+  }
+
+  .spar {
     stroke: var(--ink);
-    stroke-width: 1.6;
+    stroke-width: 1.4;
   }
 
   .sail {
     fill: var(--parchment-light);
     stroke: var(--ink);
-    stroke-width: 1;
+    stroke-width: 0.9;
+    stroke-linejoin: round;
+  }
+
+  .seam {
+    stroke: var(--ink);
+    stroke-width: 0.5;
+    opacity: 0.45;
   }
 
   .flag {

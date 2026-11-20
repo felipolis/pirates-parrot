@@ -3,13 +3,14 @@
   with a wax seal. Place inside an element with role="radiogroup".
 -->
 <script lang="ts">
+  import { faCheck, type IconDefinition } from '@fortawesome/free-solid-svg-icons';
   import type { Snippet } from 'svelte';
-  import Icon, { type IconName } from './Icon.svelte';
+  import Icon from './Icon.svelte';
 
   interface Props {
     title: string;
     description?: string;
-    icon?: IconName;
+    icon?: IconDefinition;
     selected: boolean;
     onSelect: () => void;
     /** Content under the card, such as a badge or a secondary action. */
@@ -22,10 +23,10 @@
 <div class="option" class:selected>
   <button class="choose" role="radio" aria-checked={selected} onclick={onSelect}>
     <span class="seal" aria-hidden="true">
-      {#if selected}<Icon name="check" size={13} />{/if}
+      {#if selected}<Icon icon={faCheck} size={11} />{/if}
     </span>
     {#if icon}
-      <span class="icon"><Icon name={icon} size={24} /></span>
+      <span class="icon"><Icon {icon} size={20} /></span>
     {/if}
     <span class="title">{title}</span>
     {#if description}

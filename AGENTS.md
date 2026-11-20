@@ -105,6 +105,8 @@ guessing.
   light and dark themes working.
 - Keep the UI accessible: real `<button>`s for actions, labels for every control, and respect
   `prefers-reduced-motion` for animations.
+- Icons are Font Awesome Free definitions from `@fortawesome/free-solid-svg-icons`, drawn by
+  `lib/ui/Icon.svelte`, the same set the website uses. Don't add other icon sets.
 - UI text is in English and follows the pirate theme without hurting clarity.
 
 ### Next.js (the website)

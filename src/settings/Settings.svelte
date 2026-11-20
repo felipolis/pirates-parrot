@@ -1,4 +1,8 @@
-<!-- The settings window: the captain's log. Every change is saved immediately. -->
+<!--
+  The settings window: the captain's log, one tab per subject. While the speech
+  model is missing, a short guide takes its place. Every change is saved
+  immediately.
+-->
 <script lang="ts">
   import { onMount } from 'svelte';
   import { AppState } from '../lib/app-state.svelte';
@@ -12,21 +16,40 @@
     Settings,
     ShortcutMode,
   } from '../lib/api/types';
+  import {
+    faAnchor,
+    faCopy,
+    faCrow,
+    faKeyboard,
+    faMicrophoneLines,
+    faPaste,
+    type IconDefinition,
+  } from '@fortawesome/free-solid-svg-icons';
   import { skinById } from '../lib/parrot/skins';
-  import type { IconName } from '../lib/ui/Icon.svelte';
   import OptionCard from '../lib/ui/OptionCard.svelte';
   import Section from '../lib/ui/Section.svelte';
+  import Tabs from '../lib/ui/Tabs.svelte';
   import Hero from './Hero.svelte';
   import ModelSection from './ModelSection.svelte';
   import ShortcutField from './ShortcutField.svelte';
   import SkinPicker from './SkinPicker.svelte';
+  import Welcome from './Welcome.svelte';
 
   interface Choice<T> {
     value: T;
     title: string;
     description: string;
-    icon?: IconName;
+    icon?: IconDefinition;
   }
+
+  const TABS = [
+    { id: 'model', label: 'Model', icon: faAnchor },
+    { id: 'listening', label: 'Listening', icon: faMicrophoneLines },
+    { id: 'shortcut', label: 'Shortcut', icon: faKeyboard },
+    { id: 'crew', label: 'Crew', icon: faCrow },
+  ] as const;
+
+  type TabId = (typeof TABS)[number]['id'];
 
   const SHORTCUT_MODES: Choice<ShortcutMode>[] = [
     {
@@ -46,13 +69,13 @@
       value: 'copyAndPaste',
       title: 'Paste where I’m typing',
       description: 'Lands right in your terminal or chat box. Also copied.',
-      icon: 'quill',
+      icon: faPaste,
     },
     {
       value: 'copy',
       title: 'Copy to clipboard',
       description: 'Paste it yourself, wherever you like.',
-      icon: 'scroll',
+      icon: faCopy,
     },
   ];
 
@@ -62,16 +85,25 @@
   let microphones = $state<InputDevice[]>([]);
   /** The last thing that went wrong on this page, shown in a banner. */
   let pageError = $state<string | null>(null);
+  let tab = $state<TabId>('model');
+  /** Whether the first-run guide is shown; decided once the state is loaded. */
+  let welcoming = $state(false);
 
   const skin = $derived(skinById(app.settings?.parrot));
   const status = $derived(engineSummary());
   const engineState = $derived(app.engine.state);
 
   onMount(() => {
-    const connection = app.connect().catch((error: unknown) => {
-      showError(error);
-      return null;
-    });
+    const connection = app.connect().then(
+      (disconnect) => {
+        welcoming = app.engine.state === 'notInstalled' || app.engine.state === 'installing';
+        return disconnect;
+      },
+      (error: unknown) => {
+        showError(error);
+        return null;
+      },
+    );
     listLanguages().then((list) => (languages = list), showError);
     void refreshMicrophones();
 
@@ -167,103 +199,121 @@
   {#if app.settings}
     {@const settings = app.settings}
 
-    <Section
-      title="Speech model"
-      icon="chest"
-      description="The parrot's ears. Runs on this computer, nothing you say ever leaves it."
-    >
-      <ModelSection
-        engine={app.engine}
-        {models}
-        activeModel={settings.model}
-        shortcut={settings.shortcut}
-        onSelect={(model) => void save({ model })}
-        onRemoved={() => void refreshModels()}
-      />
-    </Section>
-
-    <Section title="Listening" icon="trumpet" description="Which tongue, and which ear.">
-      <div class="fields">
-        <label class="field">
-          <span class="label">Language</span>
-          <select
-            value={settings.language}
-            onchange={(event) =>
-              void saveSelection(
-                event.currentTarget,
-                { language: event.currentTarget.value },
-                settings.language,
-              )}
-          >
-            {#each languages as language (language.code)}
-              <option value={language.code}>{language.name}</option>
-            {/each}
-          </select>
-          <small>Automatic detection gives the best punctuation.</small>
-        </label>
-
-        <label class="field">
-          <span class="label">Microphone</span>
-          <select
-            value={settings.microphone ?? ''}
-            onchange={(event) =>
-              void saveSelection(
-                event.currentTarget,
-                { microphone: event.currentTarget.value || null },
-                settings.microphone ?? '',
-              )}
-          >
-            <option value="">System default</option>
-            {#each microphones as microphone (microphone.id)}
-              <option value={microphone.id}>{microphone.name}</option>
-            {/each}
-          </select>
-        </label>
+    {#if welcoming}
+      <div class="sheet parchment">
+        <Welcome
+          engine={app.engine}
+          {models}
+          activeModel={settings.model}
+          shortcut={settings.shortcut}
+          onSelectModel={(model) => void save({ model })}
+          onModelRemoved={() => void refreshModels()}
+          onError={showError}
+          onDone={() => (welcoming = false)}
+        />
       </div>
-    </Section>
-
-    <Section title="Shortcut" icon="bell" description="Ring the bell from any app, any time.">
-      <ShortcutField
-        accelerator={settings.shortcut}
-        onChange={(shortcut) => save({ shortcut })}
-        onError={showError}
-      />
-      {#if app.shortcutProblem}
-        <p class="banner" role="alert">{app.shortcutProblem}. Try another combination.</p>
-      {/if}
-      <div class="choices" role="radiogroup" aria-label="Shortcut behavior">
-        {#each SHORTCUT_MODES as choice (choice.value)}
-          <OptionCard
-            title={choice.title}
-            description={choice.description}
-            selected={settings.shortcutMode === choice.value}
-            onSelect={() => void save({ shortcutMode: choice.value })}
-          />
-        {/each}
+    {:else}
+      <div class="book">
+        <Tabs tabs={TABS} selected={tab} onSelect={(id) => (tab = id)} label="Settings" />
+        <div class="sheet parchment" id="{tab}-panel" role="tabpanel" aria-labelledby="{tab}-tab">
+          {#if tab === 'model'}
+            <Section
+              title="Speech model"
+              description="The parrot's ears. Runs on this computer, nothing you say ever leaves it."
+            >
+              <ModelSection
+                engine={app.engine}
+                {models}
+                activeModel={settings.model}
+                shortcut={settings.shortcut}
+                onSelect={(model) => void save({ model })}
+                onRemoved={() => void refreshModels()}
+              />
+            </Section>
+          {:else if tab === 'listening'}
+            <Section title="Language" description="The tongue you speak to your parrot.">
+              <label class="field">
+                <span class="visually-hidden">Language</span>
+                <select
+                  value={settings.language}
+                  onchange={(event) =>
+                    void saveSelection(
+                      event.currentTarget,
+                      { language: event.currentTarget.value },
+                      settings.language,
+                    )}
+                >
+                  {#each languages as language (language.code)}
+                    <option value={language.code}>{language.name}</option>
+                  {/each}
+                </select>
+                <small>Automatic detection gives the best punctuation.</small>
+              </label>
+            </Section>
+            <Section title="Microphone" description="The ear your parrot listens with.">
+              <label class="field">
+                <span class="visually-hidden">Microphone</span>
+                <select
+                  value={settings.microphone ?? ''}
+                  onchange={(event) =>
+                    void saveSelection(
+                      event.currentTarget,
+                      { microphone: event.currentTarget.value || null },
+                      settings.microphone ?? '',
+                    )}
+                >
+                  <option value="">System default</option>
+                  {#each microphones as microphone (microphone.id)}
+                    <option value={microphone.id}>{microphone.name}</option>
+                  {/each}
+                </select>
+              </label>
+            </Section>
+          {:else if tab === 'shortcut'}
+            <Section title="Shortcut" description="Ring the bell from any app, any time.">
+              <ShortcutField
+                accelerator={settings.shortcut}
+                onChange={(shortcut) => save({ shortcut })}
+                onError={showError}
+              />
+              {#if app.shortcutProblem}
+                <p class="banner" role="alert">{app.shortcutProblem}. Try another combination.</p>
+              {/if}
+              <div class="choices" role="radiogroup" aria-label="Shortcut behavior">
+                {#each SHORTCUT_MODES as choice (choice.value)}
+                  <OptionCard
+                    title={choice.title}
+                    description={choice.description}
+                    selected={settings.shortcutMode === choice.value}
+                    onSelect={() => void save({ shortcutMode: choice.value })}
+                  />
+                {/each}
+              </div>
+            </Section>
+            <Section
+              title="When you finish talking"
+              description="Where the parrot drops your words."
+            >
+              <div class="choices" role="radiogroup" aria-label="Output">
+                {#each OUTPUT_MODES as choice (choice.value)}
+                  <OptionCard
+                    title={choice.title}
+                    description={choice.description}
+                    icon={choice.icon}
+                    selected={settings.output === choice.value}
+                    onSelect={() => void save({ output: choice.value })}
+                  />
+                {/each}
+              </div>
+            </Section>
+          {:else}
+            <Section title="The crew" description="Pick your shipmate for the desktop.">
+              <SkinPicker selected={skin.id} onSelect={(parrot) => void save({ parrot })} />
+            </Section>
+          {/if}
+        </div>
       </div>
-    </Section>
-
-    <Section
-      title="When you finish talking"
-      icon="quill"
-      description="Where the parrot drops your words."
-    >
-      <div class="choices" role="radiogroup" aria-label="Output">
-        {#each OUTPUT_MODES as choice (choice.value)}
-          <OptionCard
-            title={choice.title}
-            description={choice.description}
-            icon={choice.icon}
-            selected={settings.output === choice.value}
-            onSelect={() => void save({ output: choice.value })}
-          />
-        {/each}
-      </div>
-    </Section>
-
-    <Section title="The crew" icon="tricorne" description="Pick your shipmate for the desktop.">
-      <SkinPicker selected={skin.id} onSelect={(parrot) => void save({ parrot })} />
-    </Section>
+    {/if}
   {/if}
 
   <footer>
@@ -286,10 +336,7 @@
 
   :global(body) {
     min-height: 100vh;
-    background:
-      radial-gradient(ellipse 80% 260px at 50% 0%, var(--sea-glow), transparent),
-      linear-gradient(var(--sea) 0, var(--sea-deep) 520px);
-    background-attachment: fixed;
+    background: var(--sea-deep);
   }
 
   .page {
@@ -298,7 +345,31 @@
     gap: 18px;
     max-width: 700px;
     margin: 0 auto;
-    padding: 6px 20px 28px;
+    padding: 4px 20px 28px;
+  }
+
+  /* The tabs stand on the sheet they open, with no gap between them. */
+  .book {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* One page of the log, framed by a double ink rule like an old chart. */
+  .sheet {
+    position: relative;
+    padding: 24px 26px 26px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .sheet::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgb(51 36 26 / 30%);
+    border-radius: calc(var(--radius) - 5px);
+    box-shadow: inset 0 0 0 3px rgb(51 36 26 / 6%);
+    pointer-events: none;
   }
 
   .banner {
@@ -311,23 +382,12 @@
     font-weight: 700;
   }
 
-  .fields {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
-  }
-
   .field {
     display: grid;
     align-content: start;
     gap: 6px;
     /* Long microphone names must not widen the grid column. */
     min-width: 0;
-  }
-
-  .label {
-    font-family: var(--font-print-caps);
-    font-size: 17px;
   }
 
   .field small {
