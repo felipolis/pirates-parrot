@@ -32,6 +32,7 @@ not optional:
 - **Write Conventional Commits.** Releases and the changelog are generated from commit messages
   (`feat:`, `fix:`, `docs:`, `refactor:`, `ci:`, `chore:`…; `!` marks a breaking change).
   Never bump versions or create release tags by hand; see _Commits and releases_ in the README.
+  Versions belong to the desktop app: commits that only touch `site/` never trigger a release.
 
 ## Architecture rules
 
