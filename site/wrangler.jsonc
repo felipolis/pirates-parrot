@@ -3,6 +3,8 @@
   // The built site (`out/`) is served as static assets by Cloudflare Workers.
   "name": "pirates-parrot",
   "compatibility_date": "2026-11-19",
+  // Served at pirates-parrot.<account subdomain>.workers.dev.
+  "workers_dev": true,
   "assets": {
     "directory": "./out",
     "not_found_handling": "404-page",
