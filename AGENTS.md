@@ -117,6 +117,11 @@ guessing.
   state in an effect, so the static HTML and the first render agree.
 - Style with CSS Modules and the tokens in `site/src/app/globals.css`, which mirror the app's
   theme. Load fonts with `next/font` and images with `next/image`.
+- Icons come from the Font Awesome Free npm packages (`@fortawesome/*-svg-icons` with
+  `FontAwesomeIcon`), bundled with the site. Never load them from a CDN, and keep the
+  attribution in the footer.
+- Motion stays gentle and always respects `prefers-reduced-motion`. Use the shared `reveal`
+  class from `globals.css` for scroll-in effects instead of new scroll scripts.
 - Lint with the ESLint CLI and `eslint-config-next` (`next lint` no longer exists).
 - Copy is in English, plain and specific. No filler, buzzwords or claims the app can't back up.
 

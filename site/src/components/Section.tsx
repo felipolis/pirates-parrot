@@ -13,7 +13,7 @@ interface Props {
 export function Section({ id, title, intro, children }: Props) {
   return (
     <section id={id} className={styles.section} aria-labelledby={`${id}-title`}>
-      <header className={styles.header}>
+      <header className={`${styles.header} reveal`}>
         <h2 id={`${id}-title`} className={styles.title}>
           {title}
         </h2>

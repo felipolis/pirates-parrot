@@ -1,11 +1,22 @@
+/* The sky darkens upward from a glowing horizon where the waves begin. */
+.scene {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(110px, 12vw, 150px) 0 clamp(120px, 13vw, 170px);
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 100%, var(--sea-glow), transparent),
+    linear-gradient(var(--sky-top), var(--sea) 62%, var(--sky-horizon));
+}
+
 .hero {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-items: center;
   gap: 56px;
   max-width: var(--page-width);
   margin: 0 auto;
-  padding: clamp(40px, 8vw, 96px) var(--gutter) 0;
+  padding: 0 var(--gutter);
 }
 
 @media (min-width: 900px) {
@@ -16,12 +27,24 @@
 
 .copy {
   display: grid;
-  gap: 28px;
+  justify-items: start;
+  gap: 26px;
+}
+
+.motto {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--brass-light);
+  font-family: var(--font-print-caps), Georgia, serif;
+  font-size: 18px;
+  letter-spacing: 0.02em;
 }
 
 .title {
-  font-size: clamp(40px, 4.4vw, 52px);
+  font-size: clamp(40px, 4.4vw, 54px);
   letter-spacing: -0.01em;
+  text-shadow: 0 2px 24px rgb(0 0 0 / 35%);
 }
 
 .second {
@@ -31,12 +54,39 @@
 }
 
 .lead {
-  max-width: 470px;
+  max-width: 480px;
   color: var(--foam-soft);
   font-size: 19px;
+}
+
+.source {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 54px;
+  padding: 0 22px;
+  border: 1.5px solid color-mix(in srgb, var(--foam) 30%, transparent);
+  border-radius: 999px;
+  color: var(--foam);
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease;
+}
+
+.source:hover {
+  border-color: var(--foam);
+  background: color-mix(in srgb, var(--foam) 8%, transparent);
 }
 
 .demo {
   /* Room for the parrot that leans out past the terminal's edge. */
   padding-right: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .source {
+    transition: none;
+  }
 }

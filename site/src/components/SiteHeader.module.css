@@ -1,4 +1,10 @@
 .header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+}
+
+.bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,6 +25,7 @@
 
 .nav {
   display: flex;
+  align-items: center;
   gap: clamp(16px, 3vw, 32px);
   font-size: 15px;
   font-weight: 700;
@@ -27,15 +34,25 @@
 .nav a {
   color: var(--foam-soft);
   text-decoration: none;
+  transition: color 150ms ease;
 }
 
 .nav a:hover {
   color: var(--foam);
 }
 
+.github {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1.5px solid color-mix(in srgb, var(--foam) 25%, transparent);
+  border-radius: 999px;
+}
+
 /* On narrow screens only the way to the code stays. */
 @media (max-width: 560px) {
-  .nav a:not(:last-child) {
+  .nav a:not(.github) {
     display: none;
   }
 }

@@ -10,11 +10,13 @@ export function Crew({ parrots }: { parrots: Parrot[] }) {
       title="Pick a shipmate"
       intro="Every parrot ships with the app. They breathe, blink and talk along while you dictate."
     >
-      <ul className={styles.crew}>
+      <ul className={`${styles.crew} reveal`}>
         {parrots.map((parrot) => (
           <li key={parrot.id} className={styles.member}>
-            <Image className={styles.portrait} src={parrot.src} alt="" width={112} height={112} />
-            <h3 className={styles.name}>{parrot.name}</h3>
+            <div className={styles.perch}>
+              <Image className={styles.portrait} src={parrot.src} alt="" width={120} height={120} />
+            </div>
+            <h3 className={styles.plate}>{parrot.name}</h3>
             <p className={styles.tagline}>{parrot.tagline}</p>
           </li>
         ))}

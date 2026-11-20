@@ -1,22 +1,109 @@
+.section {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: clamp(72px, 10vw, 120px) var(--gutter) 0;
+  scroll-margin-top: 24px;
+}
+
+.panel {
+  display: grid;
+  gap: 40px;
+  padding: clamp(28px, 5vw, 56px);
+  border: 1px solid var(--terminal-line);
+  border-radius: 24px;
+  background:
+    radial-gradient(
+      ellipse 60% 80% at 0% 0%,
+      color-mix(in srgb, var(--sea-glow) 45%, transparent),
+      transparent
+    ),
+    var(--sea);
+  box-shadow: 0 30px 60px rgb(0 0 0 / 35%);
+}
+
+.statement {
+  display: grid;
+  align-items: center;
+  gap: 28px;
+}
+
+@media (min-width: 760px) {
+  .statement {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 40px;
+  }
+}
+
+/* A blob of scarlet wax stamped onto the page. */
+.seal {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 4px;
+  width: 128px;
+  aspect-ratio: 1;
+  border-radius: 48% 52% 45% 55% / 55% 45% 55% 45%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    var(--scarlet-light),
+    var(--scarlet) 55%,
+    var(--scarlet-dark)
+  );
+  box-shadow:
+    inset 0 0 0 6px color-mix(in srgb, var(--scarlet-dark) 55%, transparent),
+    0 0 0 6px color-mix(in srgb, var(--scarlet) 18%, transparent),
+    0 10px 24px rgb(0 0 0 / 40%);
+  color: var(--wax-text);
+  font-family: var(--font-print-caps), Georgia, serif;
+  font-size: 15px;
+  transform: rotate(-8deg);
+}
+
+.sealIcon {
+  font-size: 30px;
+}
+
+.text {
+  display: grid;
+  gap: 14px;
+  max-width: 640px;
+}
+
+.title {
+  font-size: clamp(32px, 4.4vw, 46px);
+}
+
+.intro {
+  color: var(--foam-soft);
+  font-size: 18px;
+}
+
 .facts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0 40px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0 32px;
   margin: 0;
 }
 
 .fact {
   display: grid;
   align-content: start;
-  gap: 4px;
-  padding: 18px 0;
+  gap: 6px;
+  padding: 20px 0 0;
   border-top: 1px solid var(--terminal-line);
 }
 
 .term {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   color: var(--brass-light);
   font-family: var(--font-print-caps), Georgia, serif;
-  font-size: 18px;
+  font-size: 19px;
+}
+
+.factIcon {
+  width: 18px;
 }
 
 .detail {

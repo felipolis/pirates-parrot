@@ -1,11 +1,9 @@
 .footer {
   display: grid;
-  gap: 14px;
-  /* The rule above spans the content, not the gutters. */
-  width: min(calc(var(--page-width) - 2 * var(--gutter)), calc(100% - 2 * var(--gutter)));
-  margin: clamp(96px, 12vw, 144px) auto 0;
-  padding: 32px 0 48px;
-  border-top: 1px solid var(--terminal-line);
+  gap: 16px;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 28px var(--gutter) 48px;
   color: var(--foam-faint);
   font-size: 14px;
 }
@@ -13,14 +11,22 @@
 .links {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 24px;
+  gap: 10px 26px;
 }
 
 .links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: var(--foam-soft);
   text-decoration: none;
+  transition: color 150ms ease;
 }
 
 .links a:hover {
   color: var(--foam);
+}
+
+.icon {
+  color: var(--brass);
 }

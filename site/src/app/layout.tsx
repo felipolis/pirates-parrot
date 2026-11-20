@@ -1,7 +1,12 @@
+import { config as fontAwesomeConfig } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import type { Metadata, Viewport } from 'next';
 import { IM_Fell_English, IM_Fell_English_SC, Nunito, Pirata_One } from 'next/font/google';
 import type { ReactNode } from 'react';
 import './globals.css';
+
+// Font Awesome's styles are bundled above; stop it injecting them at runtime.
+fontAwesomeConfig.autoAddCss = false;
 
 // The desktop app's typefaces, self-hosted by Next.js at build time.
 const body = Nunito({ subsets: ['latin'], variable: '--font-body' });

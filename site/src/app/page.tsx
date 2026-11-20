@@ -5,6 +5,7 @@ import { HowItWorks } from '@/components/HowItWorks';
 import { Privacy } from '@/components/Privacy';
 import { SiteFooter } from '@/components/SiteFooter';
 import { SiteHeader } from '@/components/SiteHeader';
+import { WorksWith } from '@/components/WorksWith';
 import { getCrew } from '@/lib/crew';
 import { getLatestRelease } from '@/lib/release';
 import { RELEASES_URL, REPOSITORY_URL } from '@/lib/repository';
@@ -22,10 +23,11 @@ export default async function HomePage() {
       <SiteHeader repositoryUrl={REPOSITORY_URL} logoSrc={host.src} />
       <main>
         <Hero release={release} repositoryUrl={REPOSITORY_URL} parrotSrc={host.src} />
+        <WorksWith />
         <HowItWorks />
         <Privacy />
         <Crew parrots={crew} />
-        <Closing release={release} repositoryUrl={REPOSITORY_URL} />
+        <Closing release={release} repositoryUrl={REPOSITORY_URL} parrotSrc={host.src} />
       </main>
       <SiteFooter repositoryUrl={REPOSITORY_URL} releasesUrl={RELEASES_URL} />
     </>

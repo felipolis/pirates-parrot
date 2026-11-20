@@ -1,0 +1,75 @@
+.sky {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Stars are tiny radial gradients scattered over a tile that repeats. */
+.stars {
+  position: absolute;
+  inset: 0 0 30%;
+  background-repeat: repeat;
+  animation: twinkle ease-in-out infinite alternate;
+}
+
+.near {
+  background-image:
+    radial-gradient(1.6px 1.6px at 12% 18%, var(--moon), transparent),
+    radial-gradient(1.2px 1.2px at 34% 62%, var(--moon), transparent),
+    radial-gradient(1.8px 1.8px at 58% 12%, var(--moon), transparent),
+    radial-gradient(1.2px 1.2px at 77% 44%, var(--moon), transparent),
+    radial-gradient(1.5px 1.5px at 91% 8%, var(--moon), transparent);
+  background-size: 420px 300px;
+  animation-duration: 4.2s;
+}
+
+.far {
+  background-image:
+    radial-gradient(1px 1px at 22% 38%, var(--foam-soft), transparent),
+    radial-gradient(1px 1px at 46% 84%, var(--foam-soft), transparent),
+    radial-gradient(1px 1px at 68% 26%, var(--foam-soft), transparent),
+    radial-gradient(1px 1px at 86% 70%, var(--foam-soft), transparent),
+    radial-gradient(1px 1px at 6% 76%, var(--foam-soft), transparent);
+  background-size: 260px 220px;
+  opacity: 0.7;
+  animation-duration: 6.4s;
+  animation-delay: -2s;
+}
+
+.moon {
+  position: absolute;
+  top: clamp(70px, 9vw, 110px);
+  right: max(var(--gutter), calc((100% - var(--page-width)) / 2 + 40px));
+  width: clamp(54px, 7vw, 92px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 38% 34%,
+    color-mix(in srgb, var(--moon) 40%, white),
+    var(--moon) 58%,
+    color-mix(in srgb, var(--moon) 85%, var(--ink-soft))
+  );
+  box-shadow:
+    0 0 40px color-mix(in srgb, var(--moon) 35%, transparent),
+    0 0 120px color-mix(in srgb, var(--moon) 18%, transparent);
+}
+
+/* Narrow screens have no free sky beside the header and the title. */
+@media (max-width: 640px) {
+  .moon {
+    display: none;
+  }
+}
+
+@keyframes twinkle {
+  to {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stars {
+    animation: none;
+  }
+}

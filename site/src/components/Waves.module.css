@@ -1,0 +1,51 @@
+.waves {
+  position: absolute;
+  inset: auto 0 0;
+  height: clamp(80px, 10vw, 130px);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Each tile is twice the width of the scene and slides by half of itself. */
+.layer {
+  position: absolute;
+  /* Overlaps the edge so no hairline of the scene shows beneath. */
+  bottom: -1px;
+  left: 0;
+  width: 200%;
+  animation: drift linear infinite;
+}
+
+.far {
+  height: 100%;
+  fill: var(--sea-glow);
+  opacity: 0.55;
+  animation-duration: 34s;
+  animation-direction: reverse;
+}
+
+.middle {
+  height: 72%;
+  fill: var(--sea);
+  animation-duration: 24s;
+  /* Out of step with the other layers, so the crests never line up. */
+  animation-delay: -9s;
+}
+
+.near {
+  height: 44%;
+  fill: var(--sea-deep);
+  animation-duration: 16s;
+}
+
+@keyframes drift {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer {
+    animation: none;
+  }
+}

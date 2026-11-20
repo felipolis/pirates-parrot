@@ -1,23 +1,40 @@
+/* The night lightens toward a second horizon before the footer. */
+.scene {
+  position: relative;
+  overflow: hidden;
+  margin-top: clamp(96px, 12vw, 144px);
+  padding: clamp(72px, 9vw, 110px) 0 clamp(130px, 14vw, 180px);
+  background:
+    radial-gradient(ellipse 60% 60% at 50% 100%, var(--sea-glow), transparent),
+    linear-gradient(var(--sea-deep), var(--sky-horizon));
+}
+
 .closing {
+  position: relative;
   display: grid;
-  justify-items: start;
+  justify-items: center;
   gap: 24px;
   max-width: var(--page-width);
   margin: 0 auto;
-  padding: clamp(96px, 12vw, 144px) var(--gutter) 0;
+  padding: 0 var(--gutter);
+  text-align: center;
+}
+
+.parrot {
+  filter: drop-shadow(0 12px 18px rgb(0 0 0 / 35%));
 }
 
 .title {
-  font-size: clamp(36px, 5vw, 54px);
+  font-size: clamp(36px, 5vw, 56px);
 }
 
 .note {
   max-width: 520px;
-  color: var(--foam-faint);
+  color: var(--foam-soft);
   font-size: 14px;
 }
 
 .note a {
-  color: var(--foam-soft);
+  color: var(--foam);
   text-underline-offset: 3px;
 }

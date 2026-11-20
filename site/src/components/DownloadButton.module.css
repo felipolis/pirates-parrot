@@ -1,17 +1,42 @@
 .download {
   display: grid;
+  gap: 14px;
+}
+
+.start {
   justify-items: start;
-  gap: 12px;
+}
+
+.center {
+  justify-items: center;
+  text-align: center;
+}
+
+.center .actions {
+  justify-content: center;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 14px;
 }
 
 .button {
   display: inline-flex;
   align-items: center;
-  min-height: 52px;
+  gap: 10px;
+  min-height: 54px;
   padding: 0 28px;
   border-radius: 999px;
-  background: var(--brass-light);
-  box-shadow: 0 3px 0 var(--brass);
+  background: linear-gradient(
+    var(--brass-light),
+    color-mix(in srgb, var(--brass-light) 70%, var(--brass))
+  );
+  box-shadow:
+    0 3px 0 var(--brass-dark),
+    0 12px 28px color-mix(in srgb, var(--brass-light) 18%, transparent);
   color: var(--ink);
   font-size: 17px;
   font-weight: 800;
@@ -22,13 +47,19 @@
 }
 
 .button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 0 var(--brass);
+  transform: translateY(-2px);
+  box-shadow:
+    0 5px 0 var(--brass-dark),
+    0 16px 34px color-mix(in srgb, var(--brass-light) 26%, transparent);
 }
 
 .button:active {
   transform: translateY(2px);
-  box-shadow: 0 1px 0 var(--brass);
+  box-shadow: 0 1px 0 var(--brass-dark);
+}
+
+.icon {
+  font-size: 19px;
 }
 
 .meta {
@@ -39,4 +70,10 @@
 .meta a {
   color: var(--foam);
   text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
 }

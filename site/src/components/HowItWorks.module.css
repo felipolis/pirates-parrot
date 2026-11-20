@@ -1,36 +1,85 @@
 .steps {
   counter-reset: step;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* Pages of a logbook, left a little askew on the captain's table. */
 .step {
+  position: relative;
   display: grid;
   align-content: start;
   gap: 12px;
-  padding-top: 20px;
-  border-top: 1px solid var(--terminal-line);
+  padding: 40px 28px 30px;
+  border-radius: 6px;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgb(255 255 255 / 35%), transparent 55%),
+    radial-gradient(ellipse at 100% 100%, rgb(150 110 50 / 25%), transparent 60%), var(--parchment);
+  box-shadow:
+    inset 0 0 0 1px rgb(51 36 26 / 18%),
+    inset 0 0 40px rgb(120 80 30 / 18%),
+    0 18px 40px rgb(0 0 0 / 40%);
+  color: var(--ink);
+  transform: rotate(-0.8deg);
+  transition: transform 200ms ease;
+}
+
+.step:nth-child(2) {
+  transform: rotate(0.6deg) translateY(10px);
+}
+
+.step:nth-child(3) {
+  transform: rotate(-0.4deg);
+}
+
+.step:hover {
+  transform: rotate(0deg) translateY(-4px);
 }
 
 /* Roman numerals: the typeface's old-style digits read poorly on their own. */
 .step::before {
   content: counter(step, upper-roman) '.';
   counter-increment: step;
-  color: var(--brass);
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  color: var(--ink-soft);
   font-family: var(--font-print), Georgia, serif;
-  font-size: 22px;
+  font-size: 20px;
   font-style: italic;
 }
 
+.medallion {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--brass-light), var(--brass) 70%);
+  box-shadow:
+    inset 0 0 0 2px var(--brass-dark),
+    0 3px 0 var(--brass-dark);
+  color: var(--ink);
+  font-size: 20px;
+}
+
 .title {
-  font-size: 26px;
+  font-size: 27px;
 }
 
 .body {
-  color: var(--foam-soft);
+  color: var(--ink-soft);
+  font-weight: 600;
   line-height: 1.9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step {
+    transition: none;
+  }
 }
