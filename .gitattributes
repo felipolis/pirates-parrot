@@ -1,0 +1,9 @@
+# Text files use LF line endings on every platform, as Prettier and rustfmt
+# expect. Without this, Git on Windows checks files out with CRLF and the
+# formatting checks fail on files nobody changed.
+* text=auto eol=lf
+
+# Binary assets.
+*.png binary
+*.ico binary
+*.icns binary
