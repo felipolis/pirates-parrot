@@ -46,7 +46,10 @@ After that the app works offline.
 ### Uninstalling
 
 Uninstall the app as usual for your system. The speech model, your settings and the logs stay
-behind in case you reinstall; delete these folders to remove them too:
+behind in case you reinstall or update.
+
+To remove them too on Windows, tick **Delete the application data** in the uninstaller of the
+`.exe` installer. Otherwise, and on macOS and Linux, delete these folders:
 
 | System  | Settings                                                | Speech model and logs                                                       |
 | ------- | ------------------------------------------------------- | --------------------------------------------------------------------------- |
