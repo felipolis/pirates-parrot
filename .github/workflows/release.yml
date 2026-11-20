@@ -1,14 +1,45 @@
 name: Release
 
-# Pushing a tag such as v0.2.0 builds the installers for every platform and
-# attaches them to a draft GitHub release, ready to be reviewed and published.
+# On every push to `main`, release-please keeps a release pull request up to
+# date with the next version and changelog, worked out from the Conventional
+# Commits since the last release. Merging that pull request creates a draft
+# release; this workflow then builds the installers for every platform,
+# attaches them, publishes the release and redeploys the website.
+#
+# It is all one workflow because releases and tags created with the default
+# GITHUB_TOKEN do not trigger other workflows.
 on:
   push:
-    tags: ['v*']
+    branches: [main]
+
+# Never cancel a release halfway through.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: read
 
 jobs:
+  release-please:
+    name: Prepare release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    outputs:
+      created: ${{ steps.release.outputs.release_created }}
+      id: ${{ steps.release.outputs.id }}
+      tag: ${{ steps.release.outputs.tag_name }}
+    steps:
+      - id: release
+        uses: googleapis/release-please-action@v5
+
   build:
     name: Build (${{ matrix.name }})
+    needs: release-please
+    if: needs.release-please.outputs.created == 'true'
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write
@@ -30,6 +61,8 @@ jobs:
             args: ''
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.release-please.outputs.tag }}
       - name: Install Linux system libraries
         if: runner.os == 'Linux'
         run: |
@@ -53,7 +86,26 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: ${{ github.ref_name }}
-          releaseName: Pirate's Parrot ${{ github.ref_name }}
-          releaseDraft: true
+          releaseId: ${{ needs.release-please.outputs.id }}
           args: ${{ matrix.args }}
+
+  publish:
+    name: Publish release
+    needs: [release-please, build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Publish the draft release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_ID: ${{ needs.release-please.outputs.id }}
+        run: >
+          gh api --method PATCH "repos/${{ github.repository }}/releases/$RELEASE_ID"
+          -F draft=false -f make_latest=true
+
+  website:
+    name: Update the website
+    needs: publish
+    uses: ./.github/workflows/site.yml
+    secrets: inherit

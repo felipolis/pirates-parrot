@@ -29,6 +29,9 @@ not optional:
   comments true when the code changes.
 - **Stay in scope.** Change what the task needs. Don't reformat, rename or "improve" unrelated
   code in the same change.
+- **Write Conventional Commits.** Releases and the changelog are generated from commit messages
+  (`feat:`, `fix:`, `docs:`, `refactor:`, `ci:`, `chore:`…; `!` marks a breaking change).
+  Never bump versions or create release tags by hand; see _Commits and releases_ in the README.
 
 ## Architecture rules
 

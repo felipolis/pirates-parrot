@@ -1,8 +1,8 @@
 name: Site
 
-# Checks the website on every change to it, and deploys it to Cloudflare when
-# `main` changes or a new release of the app is published, so the download
-# buttons always point at the latest version.
+# Checks the website on every change to it and deploys it to Cloudflare when
+# `main` changes. The release workflow also runs it after publishing a new
+# version, so the download buttons always point at the latest one.
 on:
   push:
     branches: [main]
@@ -20,12 +20,13 @@ on:
       - 'scripts/export-parrots.ts'
       - 'pnpm-lock.yaml'
       - '.github/workflows/site.yml'
-  release:
-    types: [published]
+  workflow_call:
   workflow_dispatch:
 
+# Called from the release workflow, `github.workflow` is the caller's name, so
+# a release deploy never cancels, or is cancelled by, a regular one.
 concurrency:
-  group: site-${{ github.ref }}
+  group: site-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

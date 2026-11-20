@@ -7,3 +7,4 @@ site/.next
 site/out
 site/public/parrots
 site/next-env.d.ts
+CHANGELOG.md

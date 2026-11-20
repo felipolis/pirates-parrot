@@ -175,22 +175,31 @@ it, and deploys it when `main` changes and whenever a release is published. Depl
 two repository secrets: `CLOUDFLARE_API_TOKEN` (a token with the _Edit Cloudflare Workers_
 permission) and `CLOUDFLARE_ACCOUNT_ID`.
 
-### Releasing
+### Commits and releases
 
-Releases are built by GitHub Actions ([`release.yml`](.github/workflows/release.yml)) for
-Windows, macOS (Apple silicon and Intel) and Linux.
+Commit messages follow [Conventional Commits](https://www.conventionalcommits.org), because
+releases are computed from them:
 
-1. Set the new version in [`Cargo.toml`](Cargo.toml) (`[workspace.package]`) and
-   [`package.json`](package.json); the app takes its version from the Rust crate. Run
-   `cargo check` to update `Cargo.lock`, then commit.
-2. Tag the commit and push the tag:
-   ```sh
-   git tag v0.2.0
-   git push origin v0.2.0
-   ```
-3. When the workflow finishes, a **draft** release with every installer attached appears under
-   Releases. Write the release notes and click **Publish release**. Publishing also redeploys
-   the website, so its download buttons offer the new version.
+| Commit                          | Effect on the next version                       |
+| ------------------------------- | ------------------------------------------------ |
+| `fix: …`                        | Patch release (0.1.0 → 0.1.1)                    |
+| `feat: …`                       | Minor release (0.1.0 → 0.2.0)                    |
+| `feat!: …` or `BREAKING CHANGE` | Minor before 1.0 (0.1.0 → 0.2.0), major after it |
+| `docs:`, `ci:`, `refactor:`, …  | No release on its own                            |
+
+Releases are automated by [release-please](https://github.com/googleapis/release-please) in
+[`release.yml`](.github/workflows/release.yml):
+
+1. After every push to `main`, release-please opens or updates a release pull request. It bumps
+   the version in `package.json`, `Cargo.toml` and `Cargo.lock` and adds the changes to
+   [`CHANGELOG.md`](CHANGELOG.md).
+2. Merge it when you want to ship. The workflow then builds the installers for Windows, macOS
+   (Apple silicon and Intel) and Linux, publishes the release with them attached, and
+   redeploys the website so its download buttons offer the new version.
+
+Never edit the version numbers or create release tags by hand. The repository needs _Settings →
+Actions → General → Allow GitHub Actions to create and approve pull requests_ turned on for
+release-please to open its pull request.
 
 ## Troubleshooting
 
