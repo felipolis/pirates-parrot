@@ -1,6 +1,6 @@
 {
   "name": "pirates-parrot",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A friendly desktop widget that transcribes your voice in real time, locally.",
   "private": true,
   "license": "MIT",
